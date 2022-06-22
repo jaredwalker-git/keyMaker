@@ -4,7 +4,7 @@ This app is still in development.
 
 Current Necessary Additions ---------------
  - Add del mode
- - Add quitting print statement
- - Require Master Password
+ - Add quitting print statement - COMPLETE
+ - Require Master Password - COMPLETE
  - Allow for entering multiple specified characters
  - After gen and acceptance, print password Saved!

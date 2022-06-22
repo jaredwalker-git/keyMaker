@@ -5,15 +5,24 @@ from genericpath import exists
 import argparse
 import keyAgent
 
-#ACCESS MUST ASK FOR STORAGE FILE, MAYBE REQUIRED PASSWORD ASWELL // STATEMENT CHECKING FOR PASSWORD FILE IF NOT EXISTING, NEW USER PROMPT
+def enterPass(): 
+    with open('passwords/master.txt', 'r') as f:
+        content = f.readlines()
 
-#ACCESS MODE ACCESSES LIST OF DICTIONARIES WITH NAME OF SERVICE, USERNAME AND PASSWORD COMBO
+    passTrue = content[1]
+    psswrd = ''
+    while not passTrue == psswrd:
+        psswrd = input('KeyMaker password: ')
+        if psswrd != passTrue:
+            print('Invalid password, try again.')
+
+    
 if __name__ == '__main__':
     keyMaker = keyAgent.keyAgent()
 
     #PARSER TO TAKE IN ARGUMENTS FOR MODE// KEYGEN MODE OR ACCESS MODE
     parser = argparse.ArgumentParser(description="Generate and store keys")
-    parser.add_argument('mode', help='Enter mode either "gen" or "access"')
+    parser.add_argument('mode', help='Enter mode either "gen", "del" or "access"')
     args = parser.parse_args()
     #CHECK FOR INITIAL BOOT // do this with file holding password? // how to make python script password protected
     if exists('passwords/master.txt'):
@@ -35,7 +44,9 @@ if __name__ == '__main__':
             
 
         print('Password saved!')
-
+'''
+    enterPass() #verify password // move this to access function
+'''
     with open('passwords/master.txt', 'r') as f:
         content = f.readlines()
         print('Hello ' + content[0]) #print username
@@ -45,6 +56,8 @@ if __name__ == '__main__':
         keyMaker.gen()
     elif args.mode == 'access':
         keyMaker.access()
+    elif args.mode == 'del':
+        keyMaker.del()
     else:
         print('Invalid mode.')
 
@@ -55,7 +68,10 @@ if __name__ == '__main__':
             keyMaker.gen()
         elif func == 'access':
             keyMaker.access()
+        elif func == 'del':
+            keyMaker.del()
         elif func == 'q': 
+            print('Thank you for using KeyMaker! Goodbye :)')
             break
         else:
             print('Invalid selection.')

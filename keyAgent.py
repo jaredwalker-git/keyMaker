@@ -108,3 +108,12 @@ class keyAgent:
                     break
                 else:
                     continue
+
+    def del():
+        choice = input('Which password would you like to delete?:')
+
+        with open('passwords/keyAccess.txt', 'r') as f:
+            content = f.readlines()
+        
+        for i in len(content):
+            #if content[i] is choice then content[i] == ''
